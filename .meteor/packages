@@ -1,0 +1,16 @@
+# Meteor packages used by this project, one per line.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+http
+standard-app-packages
+insecure
+mrt:leaflet-0.6.4
+service-configuration
+accounts-base
+accounts-password
+accounts-github
+bootstrap
+clinical:nightwatch
+
