@@ -9,6 +9,11 @@ Meteor.publish("parties", function () {
     {$or: [{"public": true}, {invited: this.userId}, {owner: this.userId}]});
 });
 
+Meteor.publish("workOrders", function () {
+  return WorkOrders.find(
+    {$or: [{"public": true}, {invited: this.userId}, {owner: this.userId}]});
+});
+
 Meteor.publish("datafiles", function () {
 	return Datafiles.find({}, {fields: {name: 1, file: 1}});
 });
