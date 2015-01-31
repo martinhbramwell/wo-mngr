@@ -22,7 +22,7 @@ Template.details.helpers({
       return r.user === Meteor.userId();
     }) || {};
 
-    return what == myRsvp.rsvp ? "chosen btn-inverse" : "";
+    return myRsvp.rsvp ? "chosen btn-inverse" : "";
   }
 });
 

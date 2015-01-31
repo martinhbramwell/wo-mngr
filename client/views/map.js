@@ -11,13 +11,13 @@ var map, markers = [ ];
 
 var initialize = function(element, centroid, zoom, features) { 
   map = L.map(element, {
-    scrollWheelZoom: false,
+    scrollWheelZoom: true,
     doubleClickZoom: false,
     boxZoom: false,
     touchZoom: false
   }).setView(new L.LatLng(centroid[0], centroid[1]), zoom);
   
-  L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {opacity: .5}).addTo(map);
+  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 1}).addTo(map);
 
   map.attributionControl.setPrefix('');
   
@@ -86,7 +86,7 @@ Template.map.rendered = function () {
   
   // initialize map events
   if (!map) {
-    initialize($("#map_canvas")[0], [ 41.8781136, -87.66677956445312 ], 13);
+    initialize($("#map_canvas")[0], [ 43.9, -78.9 ], 7);
     
     map.on("dblclick", function(e) {
       if (! Meteor.userId()) // must be logged in to create parties
