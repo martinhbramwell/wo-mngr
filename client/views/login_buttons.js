@@ -22,6 +22,17 @@ Template.loggedout.events({
       }
     })
   },
+  'click #loginFB': function(e, tmpl) {
+    Meteor.loginWithFacebook({
+      requestPermissions: ["email", "public_profile"]
+    }, function(err){
+      if (err) {
+        console.log(err)
+      } else {
+        // show an alert
+      }
+    })
+  },
   'click #loginGP': function(e, tmpl) {
     Meteor.loginWithGoogle({
       requestPermissions: ["email", "profile"]

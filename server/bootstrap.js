@@ -2,7 +2,7 @@
 Meteor.startup(function () {
   if (Parties.find().count() === 0) {
 
-    console.log("+++++++++++++++++++");
+    console.log("+++++++++++++++++++ " + process.env.GITHUB_CLIENT_ID);
 /*
     var data = [
       {name: "Meteor Principles",

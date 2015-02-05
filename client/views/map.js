@@ -14,10 +14,10 @@ var initialize = function(element, centroid, zoom, features) {
     scrollWheelZoom: true,
     doubleClickZoom: false,
     boxZoom: false,
-    touchZoom: false
+    touchZoom: true
   }).setView(new L.LatLng(centroid[0], centroid[1]), zoom);
   
-  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 1}).addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {opacity: 1}).addTo(map);
 
   map.attributionControl.setPrefix('');
   

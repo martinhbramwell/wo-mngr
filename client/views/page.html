@@ -11,7 +11,7 @@
       <div id="navbarHeader" class="navbar">
         <div class="navbar-inner">
           <div class="container">
-            <a id="navbarBrandLink" class='brand' href='/'>All Tomorrow's Parties</a>
+            <a id="navbarBrandLink" class='brand' href='/'>All Tomorrow's Work Orders</a>
             <div class="nav pull-right">
               {{> loginButtons}}
             </div>
@@ -25,9 +25,12 @@
             {{> details}}
             {{#if currentUser}}
             <div class="pagination-centered">
-              <em><small>Double click the map to post a party!</small></em>
+              <em><small>Double click the map to post a party!!</small></em>
             </div>
             {{/if}}
+            <div class="pagination-centered">
+              {{>fscoll}}
+            </div>
           </div>
           <div class="span8">
             {{> map}}

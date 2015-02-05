@@ -1,23 +1,43 @@
 // Accounts config
 ServiceConfiguration.configurations.remove({
-  service: "github"
+  service: "facebook"
 });
+
+ServiceConfiguration.configurations.insert({
+  service: "facebook",
+  appId: process.env.FACEBOOK_APP_ID,
+  secret: process.env.FACEBOOK_SECRET
+});
+/*
+https://www.facebook.com/dialog/oauth
+?client_id=342567642601187
+&redirect_uri=http://localhost:3000/_oauth/facebook?close
+&display=popup
+&scope=user,public_repo
+&state=eyJsb2dpblN0eWxlIjoicG9wdXAiLCJjcmVkZW50aWFsVG9rZW4iOiJNSlZqcEhuY3JRcWk2ak5kVm5XdEtnZ1VEdTJlOWpCMUJkNkNkMTJPRmhHIn0=
+*/
+// -----------------------------------------
 
 ServiceConfiguration.configurations.remove({
   service: "google"
 });
 
-// localhost:3000
 ServiceConfiguration.configurations.insert({
-  service: "github",
-  clientId: "83f1c796a14e1f6ea61a",
-  secret: "1c59890a41679554964713050e237ee89332731b"
+  service: "google",
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  secret: process.env.GOOGLE_SECRET
+});
+
+// -----------------------------------------
+
+ServiceConfiguration.configurations.remove({
+  service: "github"
 });
 
 ServiceConfiguration.configurations.insert({
-  service: "google",
-  clientId: "7765215051-2kkaetqbdonvvms97o9uojchok7vfm1s.apps.googleusercontent.com",
-  secret: "x0Usr-domXun4i2HGJT8NQ9a"
+  service: "github",
+  clientId: process.env.GITHUB_CLIENT_ID,
+  secret: process.env.GITHUB_SECRET
 });
 
 Accounts.onCreateUser(function(options, user){
@@ -25,25 +45,26 @@ Accounts.onCreateUser(function(options, user){
   var result;
   var profile;
   var accessToken;
-  if(user.services.github) {
-    accessToken = user.services.github.accessToken;
-    result = Meteor.http.get("https://api.github.com/user", {
+  if(user.services.facebook) {
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>  ");
+    console.log(user.services.facebook);
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>  ");
+    accessToken = user.services.facebook.accessToken;
+    result = Meteor.http.get("https://graph.facebook.com/" + user.services.facebook.id, {
       headers: {"User-Agent": "Meteor/1.0"},
       params: {
         access_token: accessToken
       }
     });
     profile = _.pick(result.data,
-      "login",
+      "id",
       "name",
-      "avatar_url",
-      "url",
-      "company",
-      "blog",
-      "location",
+      "first_name",
+      "link",
+      "last_name",
       "email",
-      "bio",
-      "html_url"
+      "gender",
+      "locale"
     );
 
   } else if(user.services.google) {
@@ -68,6 +89,26 @@ Accounts.onCreateUser(function(options, user){
       "hd"
     );
     profile.avatar_url = profile.picture
+  } else if(user.services.github) {
+    accessToken = user.services.github.accessToken;
+    result = Meteor.http.get("https://api.github.com/user", {
+      headers: {"User-Agent": "Meteor/1.0"},
+      params: {
+        access_token: accessToken
+      }
+    });
+    console.log(result.data);
+    profile = _.pick(result.data,
+      "name",
+      "bio",
+      "avatar_url",
+      "email",
+      "email_verified",
+      "birthdate",
+      "gender",
+      "locale",
+      "hd"
+    );
   } else {
     console.log("Aw crap!");
   };

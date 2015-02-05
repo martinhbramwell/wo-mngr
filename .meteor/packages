@@ -10,8 +10,12 @@ mrt:leaflet-0.6.4
 service-configuration
 accounts-base
 accounts-password
-accounts-github
 bootstrap
 clinical:nightwatch
 
 accounts-google
+cfs:standard-packages
+cfs:filesystem
+cfs:gridfs
+accounts-facebook
+accounts-github

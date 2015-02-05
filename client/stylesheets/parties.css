@@ -83,3 +83,13 @@ input.chosen {
     padding: 3px;
     padding-bottom: 0;
 }
+
+.upload input{
+  display: none;
+}
+
+.upload label{
+  background: DarkSlateBlue;
+  color: white;
+  padding: 5px 10px;
+}
